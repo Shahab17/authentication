@@ -47,6 +47,17 @@ const Navbar = () => {
             Register
           </NavLink>
         </li>
+        <li>
+          {" "}
+          <NavLink
+            to="/orders"
+            className={({ isActive, isPending }) =>
+              isActive ? "text-blue-600" : isPending ? "pending" : ""
+            }
+          >
+            Orders
+          </NavLink>
+        </li>
       </ul>
     </>
   );

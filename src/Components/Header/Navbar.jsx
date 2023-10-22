@@ -58,6 +58,32 @@ const Navbar = () => {
             Orders
           </NavLink>
         </li>
+        { user &&
+          <>
+            <li>
+              {" "}
+              <NavLink
+                to="/profile"
+                className={({ isActive, isPending }) =>
+                  isActive ? "text-blue-600" : isPending ? "pending" : ""
+                }
+              >
+                Profile
+              </NavLink>
+            </li>
+            <li>
+              {" "}
+              <NavLink
+                to="/dashborad"
+                className={({ isActive, isPending }) =>
+                  isActive ? "text-blue-600" : isPending ? "pending" : ""
+                }
+              >
+                Dashborad
+              </NavLink>
+            </li>
+          </>
+        }
       </ul>
     </>
   );
@@ -95,16 +121,18 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{navLinks}</ul>
       </div>
       <div className="navbar-end">
-        {
-        user ?
-        <>
-        <span>{user.email}</span> 
-        <a onClick={handleLogOut} className="btn">Sign Out</a>
-        </> 
-        :
-        <Link to="/login" className="btn">Login</Link>
-        
-        }
+        {user ? (
+          <>
+            <span>{user.email}</span>
+            <a onClick={handleLogOut} className="btn">
+              Sign Out
+            </a>
+          </>
+        ) : (
+          <Link to="/login" className="btn">
+            Login
+          </Link>
+        )}
       </div>
     </div>
   );

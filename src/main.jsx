@@ -11,6 +11,7 @@ import Register from "./Pages/Register/Register";
 import AuthProvider from "./ContextApi/AuthProvider";
 import Orders from "./Pages/Orders/Orders";
 import PrivateRoute from "./Components/PrivateRoute/PrivateRoute";
+import Profile from "./Pages/Profile/Profile";
 
 const router = createBrowserRouter([
   {
@@ -31,9 +32,17 @@ const router = createBrowserRouter([
       },
       {
         path: "/orders",
-        element: ( 
+        element: (
           <PrivateRoute>
             <Orders></Orders>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/profile",
+        element: (
+          <PrivateRoute>
+            <Profile></Profile>{" "}
           </PrivateRoute>
         ),
       },

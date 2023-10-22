@@ -1,9 +1,11 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../ContextApi/AuthProvider";
 
 const Login = () => {
-  const { SignInUser } = useContext(AuthContext);
+  const { SignInUser, signInWithGoogle } = useContext(AuthContext);
+
+  const navigate = useNavigate(); // eita use kore kun page e jabe login korar por oita bole dilei hobe
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -13,6 +15,18 @@ const Login = () => {
 
     // signInUser using from AuthProvider
     SignInUser(email, password)
+      .then((res) => {
+        console.log(res.user);
+        e.target.reset();
+        navigate("/orders");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const handleLoginWithGoogle = () => {
+    signInWithGoogle()
       .then((res) => {
         console.log(res.user);
       })
@@ -64,6 +78,9 @@ const Login = () => {
             <Link className="text-blue-500 font-medium" to="/register">
               Register
             </Link>{" "}
+          </p>
+          <p className="text-center mt-5">
+            <button onClick={handleLoginWithGoogle} className="btn  ">Google</button>
           </p>
         </form>
       </div>

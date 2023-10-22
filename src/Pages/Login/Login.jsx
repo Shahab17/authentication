@@ -1,13 +1,25 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../ContextApi/AuthProvider";
 
 const Login = () => {
+  const { SignInUser } = useContext(AuthContext);
 
-    const handleLogin = (e)=>{
-        e.preventDefault()
-        const email = e.target.email.value;
-        const password = e.target.password.value;
-        console.log(email,password)
-    }
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    console.log(email, password);
+
+    // signInUser using from AuthProvider
+    SignInUser(email, password)
+      .then((res) => {
+        console.log(res.user);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   return (
     <div className="hero  h-[80vh] flex items-center justify-center ">
@@ -43,9 +55,16 @@ const Login = () => {
             </label>
           </div>
           <div className="form-control mt-6">
-            <button className="btn   bg-gradient-to-r from-cyan-100 to-blue-500">Login</button>
+            <button className="btn   bg-gradient-to-r from-cyan-100 to-blue-500">
+              Login
+            </button>
           </div>
-        <p>New Here? Please <Link className="text-blue-500 font-medium" to="/register">Register</Link> </p>
+          <p>
+            New Here? Please{" "}
+            <Link className="text-blue-500 font-medium" to="/register">
+              Register
+            </Link>{" "}
+          </p>
         </form>
       </div>
     </div>
